@@ -1,15 +1,15 @@
 <template lang="pug">
-  circle(
-    :r="c.r"
-    :key="key"
-    :fill="c.data.color"
-    @mouseover="hoverClass=mouseInClass()"
-    :class="hoverClass"
-    @mouseleave="hoverClass=''"
-    :cx="c.x"
-    :cy="c.y"
-    @click="$emit('getChildren')"
-  )
+circle(
+  :r="c.r"
+  :key="key"
+  :fill="c.data.color"
+  @mouseover="hoverClass=mouseInClass()"
+  :class="hoverClass"
+  @mouseleave="hoverClass=''"
+  :cx="c.x"
+  :cy="c.y"
+  @click="$emit('getChildren')"
+)
 </template>
 
 <script>

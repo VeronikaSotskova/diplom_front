@@ -1,25 +1,25 @@
 <template lang="pug">
-  foreignObject(
-    :x="rectangleArea.x"
-    :y="rectangleArea.y"
-    :width="rectangleArea.width"
-    :height="isClicked ? rectangleArea.height : (rectangleArea.height-marginDiv)/4"
+foreignObject(
+  :x="rectangleArea.x"
+  :y="rectangleArea.y"
+  :width="rectangleArea.width"
+  :height="isClicked ? rectangleArea.height : (rectangleArea.height-marginDiv)/4"
+)
+  div(
+    :style="{width: `${rectangleArea.width}px`, maxHeight:`${(rectangleArea.height-marginDiv)/4}px`}"
+    class="circleTitle btn btn-secondary card-title"
+    @click="show"
   )
-    div(
-      :style="{width: `${rectangleArea.width}px`, maxHeight:`${(rectangleArea.height-marginDiv)/4}px`}"
-      class="circleTitle btn btn-secondary card-title"
-      @click="show"
-    )
-      p(
-        class="circleTitleText"
-      ) {{ circle.data.name }}
-    div(
-      v-if="isClicked && (circle.data.description || circle.data.business_name)"
-      :style="{width: `${rectangleArea.width}px`, maxHeight: `${(rectangleArea.height-marginDiv)/4 * 3}px`}"
-      class="circleDescription card-body"
-      @click="isClicked=false"
-    )
-      p(class="card-text") {{ circle.data.description || circle.data.business_name }}
+    p(
+      class="circleTitleText"
+    ) {{ circle.data.name }}
+  div(
+    v-if="isClicked && (circle.data.description || circle.data.business_name)"
+    :style="{width: `${rectangleArea.width}px`, maxHeight: `${(rectangleArea.height-marginDiv)/4 * 3}px`}"
+    class="circleDescription card-body"
+    @click="isClicked=false"
+  )
+    p(class="card-text") {{ circle.data.description || circle.data.business_name }}
 </template>
 
 <script>

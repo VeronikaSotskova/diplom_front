@@ -1,5 +1,5 @@
 <template lang="pug">
-  CirclePacking
+CirclePacking
 </template>
 
 <script>
