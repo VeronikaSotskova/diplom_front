@@ -72,8 +72,27 @@ export default {
   padding: 0;
 }
 
+@media screen and (max-width: 600px) {
+  .circleTitle {
+    font-size: 7px;
+    font-weight: normal;
+  }
+  .circleDescription {
+    font-size: 6px;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .circleTitle {
+    font-size: 15px;
+  }
+  .circleDescription {
+    font-size: 12px;
+  }
+}
+
+
 .circleTitle {
-  font-size: 15px;
   font-weight: 600;
   text-align:center;
   white-space: pre-wrap;
@@ -82,10 +101,11 @@ export default {
   overflow-x: hidden;
   word-break:break-all;
   -webkit-overflow-scrolling: touch;
+  padding: 0;
 }
 
 .circleDescription {
-  font-size: 12px;
+  padding: 5px;
   background: white;
   text-align:center;
   color: black;
