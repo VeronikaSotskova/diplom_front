@@ -13,6 +13,7 @@
     "core-js": "^3.6.5",
     "d3": "^7.3.0",
     "express": "^4.17.3",
+    "gitart-vue-dialog": "^2.0.5",
     "serve-static": "^1.14.2",
     "vue": "^3.0.0",
     "vue-zoomable": "^0.1.8",

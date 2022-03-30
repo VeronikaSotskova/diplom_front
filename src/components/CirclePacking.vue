@@ -66,7 +66,6 @@ export default {
   data() {
     return {
       rootNode: {},
-      depth: 0,
       path: [],
       navHeight: 0,
     }
@@ -93,8 +92,7 @@ export default {
     clickMain() {
       console.log(this.$refs.navbar_breadcrumb.clientHeight)
       this.$store.dispatch("business_domains/getDomains").then((data) => {
-        this.rootNode = this.pack(data)
-        this.depth = 0
+        this.rootNode = this.pack(data)\
         this.path = []
       });
     },
@@ -102,7 +100,6 @@ export default {
       if (nod.data.has_children) {
         this.$store.dispatch("business_domains/getDomains", {id: nod.data.id}).then((data) => {
           this.rootNode = this.pack(data)
-          this.depth += 1
           this.path.push({text: this.rootNode.data.name, id: this.rootNode.data.id})
         });
       }
@@ -112,7 +109,6 @@ export default {
       console.log(nodeIndexPath)
       this.$store.dispatch("business_domains/getDomains", {id: nod.id}).then((data) => {
         this.rootNode = this.pack(data)
-        this.depth = this.path.length
         this.path = this.path.slice(0, nodeIndexPath+1)
       });
     },
@@ -122,12 +118,10 @@ export default {
         console.log(this.path[this.path.length-1].id)
         this.$store.dispatch("business_domains/getDomains", {id: this.path[this.path.length-1].id}).then((data) => {
           this.rootNode = this.pack(data)
-          this.depth -= 1
         });
       } else {
         this.$store.dispatch("business_domains/getDomains").then((data) => {
           this.rootNode = this.pack(data)
-          this.depth -= 1
         });
       }
     },
@@ -147,6 +141,7 @@ export default {
 <style scoped>
 circle {
   transition: 0.4s linear;
+  fill-opacity: .7;
 }
 .breadcrumb-item {
   font-weight: 500;

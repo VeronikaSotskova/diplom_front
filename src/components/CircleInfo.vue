@@ -3,23 +3,24 @@ foreignObject(
   :x="rectangleArea.x"
   :y="rectangleArea.y"
   :width="rectangleArea.width"
-  :height="isClicked ? rectangleArea.height : (rectangleArea.height-marginDiv)/4"
+  height="1"
+  overflow="visible"
 )
+  GDialog(v-model="dialogState" max-width="500" scrollable)
+    .wrapper
+      .content
+        .title {{ circle.data.name }}
+        p {{ circle.data.description || circle.data.business_name }}
+      .actions
+        button(class="btn btn-outline-dark" @click="dialogState = false") Close
   div(
-    :style="{width: `${rectangleArea.width}px`, maxHeight:`${(rectangleArea.height-marginDiv)/4}px`}"
+    :style="{width: `${rectangleArea.width}px`, maxHeight:`${rectangleArea.height/2}px`}"
     class="circleTitle btn btn-secondary card-title"
-    @click="show"
+    @click="dialogState = true"
   )
     p(
       class="circleTitleText"
     ) {{ circle.data.name }}
-  div(
-    v-if="isClicked && (circle.data.description || circle.data.business_name)"
-    :style="{width: `${rectangleArea.width}px`, maxHeight: `${(rectangleArea.height-marginDiv)/4 * 3}px`}"
-    class="circleDescription card-body"
-    @click="isClicked=false"
-  )
-    p(class="card-text") {{ circle.data.description || circle.data.business_name }}
 </template>
 
 <script>
@@ -30,8 +31,7 @@ export default {
   },
   data() {
     return {
-      isClicked: false,
-      marginDiv: 10,
+      dialogState: false,
     }
   },
   computed: {
@@ -40,9 +40,6 @@ export default {
     }
   },
   methods: {
-    show() {
-      this.isClicked = !this.isClicked
-    },
     getRect(c) {
       const angle = 90
       const angX = (180 - angle) / 2 * 3 + angle
@@ -66,6 +63,37 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.wrapper {
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.content {
+  padding: 20px;
+  white-space: pre-wrap;
+  word-break:break-all;
+  overflow: auto;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.actions {
+  padding: 10px 20px;
+  border-top: 1px solid rgb(179, 179, 179);
+  display: block;
+}
+/* Растягиваем второй блок на максимальнуцю ширину */
+.actions.max {
+  flex: 1;
+}
+
 .circleTitleText {
   text-align: center;
   margin: 0;
@@ -77,20 +105,13 @@ export default {
     font-size: 7px;
     font-weight: normal;
   }
-  .circleDescription {
-    font-size: 6px;
-  }
 }
 
 @media screen and (min-width: 601px) {
   .circleTitle {
     font-size: 15px;
   }
-  .circleDescription {
-    font-size: 12px;
-  }
 }
-
 
 .circleTitle {
   font-weight: 600;
@@ -102,26 +123,11 @@ export default {
   word-break:break-all;
   -webkit-overflow-scrolling: touch;
   padding: 0;
-}
-
-.circleDescription {
-  padding: 5px;
-  background: white;
-  text-align:center;
-  color: black;
-  overflow-y: auto;
-  overflow-x: hidden;
-  margin-top: 10px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.circleDescription, .circleTitle {
-  overflow: auto;
+  margin: 0;
   -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
-.circleDescription::-webkit-scrollbar, .circleTitle::-webkit-scrollbar {
+.circleTitle::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
