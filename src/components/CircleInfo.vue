@@ -125,6 +125,7 @@ export default {
   padding: 0;
   margin: 0;
   -ms-overflow-style: none;
+  position: fixed;
 }
 
 .circleTitle::-webkit-scrollbar {
