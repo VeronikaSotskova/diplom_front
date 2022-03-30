@@ -106,9 +106,9 @@ export default {
     clickToNode(nod){
       let nodeIndexPath = this.path.indexOf(nod);
       this.$store.dispatch("business_domains/getDomains", {id: nod.id}).then((data) => {
-        this.rootNode = this.pack(data)
-        this.path = this.path.slice(0, nodeIndexPath+1)
-      });
+          this.rootNode = this.pack(data)
+          this.path = this.path.slice(0, nodeIndexPath+1)
+        });
     },
     clickBehind() {
       this.path.pop()
@@ -123,13 +123,14 @@ export default {
       }
     },
     pack(domainData) {
-      let hh = d3.hierarchy(domainData)
+      let childrenLength = domainData.children ? domainData.children.length : 1
+      let paddingCircles = childrenLength > 2 ? 5 : 20;
+      let hierarchyData = d3.hierarchy(domainData)
           .sum((d) => d.value)
           .sort((a, b) => b.value - a.value)
-      let resp = d3.pack()
+      return d3.pack()
           .size([this.width, this.height])
-          .padding(30)(hh)
-      return resp
+          .padding(paddingCircles)(hierarchyData)
     }
   }
 }
