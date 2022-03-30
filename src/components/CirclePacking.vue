@@ -90,9 +90,8 @@ export default {
   },
   methods: {
     clickMain() {
-      console.log(this.$refs.navbar_breadcrumb.clientHeight)
       this.$store.dispatch("business_domains/getDomains").then((data) => {
-        this.rootNode = this.pack(data)\
+        this.rootNode = this.pack(data)
         this.path = []
       });
     },
@@ -106,7 +105,6 @@ export default {
     },
     clickToNode(nod){
       let nodeIndexPath = this.path.indexOf(nod);
-      console.log(nodeIndexPath)
       this.$store.dispatch("business_domains/getDomains", {id: nod.id}).then((data) => {
         this.rootNode = this.pack(data)
         this.path = this.path.slice(0, nodeIndexPath+1)
@@ -115,7 +113,6 @@ export default {
     clickBehind() {
       this.path.pop()
       if (this.path.length > 0) {
-        console.log(this.path[this.path.length-1].id)
         this.$store.dispatch("business_domains/getDomains", {id: this.path[this.path.length-1].id}).then((data) => {
           this.rootNode = this.pack(data)
         });
