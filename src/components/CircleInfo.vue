@@ -4,7 +4,6 @@ foreignObject(
   :y="rectangleArea.y"
   :width="rectangleArea.width"
   height="1"
-  overflow="visible"
 )
   GDialog(v-model="dialogState" max-width="500" scrollable)
     .wrapper
@@ -17,6 +16,7 @@ foreignObject(
     :style="{width: `${rectangleArea.width}px`, maxHeight:`${rectangleArea.height/2}px`}"
     class="circleTitle btn btn-secondary card-title"
     @click="dialogState = true"
+    xmlns="http://www.w3.org/2000/xmlns/"
   )
     p(
       class="circleTitleText"
@@ -134,5 +134,6 @@ export default {
 
 foreignObject {
   transition: 0.4s linear;
+  overflow: visible;
 }
 </style>
